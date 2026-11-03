@@ -1,0 +1,17 @@
+{
+	"name": "ls_onprem_file",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\adf-project",
+			"userId": "desktop-l00e8t8\\user",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjYzExYTgyNC05MmEzLTQwZTgtODYzYi0yMGRhYTE5YTgyYmIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "kainat-selfhosted",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

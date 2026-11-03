@@ -1,0 +1,6 @@
+{
+	"name": "kainat-selfhosted",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

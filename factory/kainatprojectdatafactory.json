@@ -1,0 +1,15 @@
+{
+	"name": "kainatprojectdatafactory",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9a3fc510-343c-4928-bb03-f7bd05a728f6",
+		"tenantId": "df7695be-9961-47e5-94d9-42144960a38f"
+	}
+}
