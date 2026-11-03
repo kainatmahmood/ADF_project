@@ -1,79 +1,187 @@
-# Azure Data Factory Project
+# Azure Data Factory – Data Engineering Project
 
-## Overview
+## Project Overview
 
-This repository contains my practical work and configurations created while learning Microsoft Azure Data Factory. The project focuses on understanding how data integration workflows are created, configured, and managed using Azure services.
+This project focuses on building and managing data integration workflows using Microsoft Azure Data Factory (ADF). It covers different ETL processes, including data extraction from SQL databases and REST APIs, data movement to Azure Storage, incremental data loading, and pipeline monitoring.
 
-It includes different ADF components such as pipelines, datasets, linked services, data flows, and integration runtime configurations.
+The project also explores how different Azure Data Factory components work together to automate data workflows.
 
 ## Technologies Used
 
 - Microsoft Azure
-- Azure Data Factory
-- Azure Data Lake Storage
+- Azure Data Factory (ADF)
+- Azure SQL Database
+- Azure Data Lake Storage Gen2
+- Azure Logic Apps
+- REST APIs
 - SQL
 - JSON
-- ETL (Extract, Transform, Load)
+- GitHub
 
-## Project Structure
+## Project Architecture
+
+The project follows a basic data integration workflow:
+
+```text
+Source Systems
+     |
+     |-- SQL Database
+     |
+     |-- REST APIs
+     |
+     v
+Azure Data Factory
+     |
+     |-- Data Extraction
+     |-- Data Transformation
+     |-- Incremental Loading
+     |-- Pipeline Orchestration
+     |
+     v
+Azure Storage
+     |
+     v
+Data Files (CSV / JSON)
+     |
+     v
+Pipeline Monitoring
+     |
+     v
+Azure Logic Apps
+     |
+     v
+Email Notifications
+```
+
+## Pipelines and Their Purpose
+
+### 1. Incremental Data Load Pipeline
+
+This pipeline demonstrates incremental data loading from a SQL database to Azure Storage.
+
+Instead of copying the entire dataset every time, it identifies and loads only new or updated records using a watermark column (`last_updated`).
+
+**Key Activities:**
+- Lookup: Retrieves the previously stored watermark timestamp.
+- Lookup: Checks whether new or updated records are available.
+- If Condition: Determines whether records need to be processed.
+- Copy Data: Transfers new or updated records to the destination.
+- Lookup: Retrieves the latest update timestamp.
+- Watermark Update: Stores the latest timestamp for the next pipeline execution.
+
+**Purpose:** To reduce unnecessary data transfers and make data ingestion more efficient.
+
+### 2. REST API Data Extraction Pipeline
+
+This pipeline demonstrates how to extract data from REST APIs and store the API response in Azure Storage.
+
+It uses Azure Data Factory's REST connector to retrieve data from an API endpoint.
+
+**Key Activities:**
+- Web Activity: Retrieves information from the API endpoint when required.
+- Copy Data: Extracts API data and transfers it to the destination.
+- Pagination: Uses parameters such as `limit` and `offset` to retrieve records in batches.
+
+**Purpose:** To understand API-based data ingestion and handle large datasets through pagination.
+
+### 3. File Processing Pipeline
+
+This pipeline demonstrates how to process multiple files stored in Azure Storage.
+
+It uses dynamic expressions and conditional logic to handle files during pipeline execution.
+
+**Key Activities:**
+- Get Metadata: Retrieves information about files.
+- ForEach: Iterates through the available files.
+- If Condition: Applies conditions to control file processing.
+- Copy Data: Moves the selected files to the destination.
+
+**Purpose:** To automate file processing and understand dynamic pipeline execution.
+
+### 4. Pipeline Monitoring and Email Notifications
+
+This workflow demonstrates how Azure Data Factory can work with Azure Logic Apps to generate email notifications.
+
+When a pipeline execution completes, its status can be used to trigger a notification workflow.
+
+**Key Activities:**
+- Azure Data Factory: Executes the data pipeline.
+- Logic Apps: Handles the notification workflow.
+- Email Connector: Sends an email notification to the configured recipient.
+
+**Purpose:** To understand pipeline monitoring and automated failure or success notifications.
+
+## Azure Data Factory Components
+
+The repository contains the following ADF resource configurations:
+
+| Component | Description |
+|---|---|
+| Pipelines | Define and orchestrate data integration workflows. |
+| Datasets | Represent the structure and location of source and destination data. |
+| Linked Services | Define connections to data sources and destinations. |
+| Data Flows | Define data transformation operations. |
+| Integration Runtime | Provides the infrastructure for data movement and activity execution. |
+| Factory | Contains the Data Factory resource configuration. |
+
+## Repository Structure
 
 ```text
 ADF_project/
 │
 ├── dataflow/
+│
 ├── dataset/
+│
 ├── factory/
+│
 ├── integrationRuntime/
+│
 ├── linkedService/
+│
 ├── pipeline/
+│
 ├── publish_config.json
+│
 └── README.md
 ```
 
-## Components
+## Key Learning Outcomes
 
-**Pipelines**
+Through this project, I have gained practical experience in:
 
-Used to organize and execute data integration activities in Azure Data Factory.
+- Building and managing ETL pipelines using Azure Data Factory.
+- Connecting SQL databases and REST APIs with Azure Data Factory.
+- Moving data between source systems and Azure Storage.
+- Implementing incremental data loading using watermark timestamps.
+- Working with API pagination and dynamic parameters.
+- Processing multiple files using ForEach and If Condition activities.
+- Understanding data transformation and pipeline orchestration.
+- Integrating Azure Logic Apps for email notifications.
+- Managing Data Factory resources using GitHub.
 
-**Datasets**
+## Getting Started
 
-Define the structure and location of the data used by pipelines.
+To explore this project:
 
-**Linked Services**
+1. Clone the repository:
 
-Contain connection configurations for data sources and destinations.
+   ```bash
+   git clone https://github.com/kainatmahmood/ADF_project.git
+   ```
 
-**Data Flows**
+2. Open the repository in your preferred code editor.
+3. Review the pipeline, dataset, and linked service configurations.
+4. Open Azure Data Factory Studio.
+5. Configure the required Azure resources and linked services.
+6. Update connection details according to your environment.
+7. Validate and execute the pipelines.
 
-Used to perform data transformations within Azure Data Factory.
-
-**Integration Runtime**
-
-Provides the infrastructure required for data movement and activity execution.
-
-**Factory**
-
-Contains the Data Factory configuration files.
-
-## What I Learned
-
-Through this project, I gained practical experience with:
-
-- Creating and configuring Azure Data Factory resources.
-- Working with pipelines and activities.
-- Connecting data sources and destinations using linked services.
-- Configuring datasets.
-- Understanding data movement and transformation.
-- Working with Integration Runtime.
-- Managing Azure Data Factory resources through GitHub.
-
-## Purpose
-
-The purpose of this project is to strengthen my practical understanding of cloud-based data integration and ETL processes as part of my learning journey in Data Engineering.
+**Note:** Azure resources and connection configurations must be set up before executing the pipelines.
 
 ## Author
 
 **Kainat Mahmood**
 
-[GitHub Profile](https://github.com/kainatmahmood)
+GitHub: https://github.com/kainatmahmood
+
