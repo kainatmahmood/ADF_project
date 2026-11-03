@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "kainatprojectdatafactory"
+		},
+		"ls_azuresql_password": {
+			"value": ""
+		},
+		"ls_datalake_accountKey": {
+			"value": ""
+		},
+		"ls_onprem_file_password": {
+			"value": ""
+		},
+		"Ls_github_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/"
+		},
+		"ls_azuresql_properties_typeProperties_server": {
+			"value": "adfprojectdbserver.database.windows.net"
+		},
+		"ls_azuresql_properties_typeProperties_database": {
+			"value": "adfprojectdb"
+		},
+		"ls_azuresql_properties_typeProperties_userName": {
+			"value": "kainatadmin"
+		},
+		"ls_datalake_properties_typeProperties_url": {
+			"value": "https://adfkainatstorage.dfs.core.windows.net/"
+		},
+		"ls_onprem_file_properties_typeProperties_host": {
+			"value": "C:\\adf-project"
+		},
+		"ls_onprem_file_properties_typeProperties_userId": {
+			"value": "desktop-l00e8t8\\user"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
